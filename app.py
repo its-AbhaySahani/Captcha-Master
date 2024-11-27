@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 import requests
 
 app = Flask(__name__)
 
 # Replace these with your actual reCAPTCHA keys
-SITE_KEY = "your_site_key"
-SECRET_KEY = "your_secret_key"
+SITE_KEY = "your_actual_site_key"
+SECRET_KEY = "your_actual_secret_key"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -25,9 +25,9 @@ def index():
         if result.get("success"):
             return render_template("success.html")
         else:
-            return render_template("index.html", site_key=SITE_KEY, error="CAPTCHA validation failed. Try again!")
+            return render_template("mainPage.html", site_key=SITE_KEY, error="CAPTCHA validation failed. Try again!")
 
-    return render_template("index.html", site_key=SITE_KEY, error=None)
+    return render_template("mainPage.html", site_key=SITE_KEY, error=None)
 
 @app.route("/success")
 def success():
